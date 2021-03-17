@@ -34,7 +34,7 @@ public abstract class piece {
     public boolean isFirst_move() { return this.first_move; }
     public char getPromo() { return this.promo; }
     public boolean getEnpass() { return  this.enpass; }
-    public char getCastling() {return this.castling; }
+    public boolean getCastling() {return this.castling; }
 
     // This methods validates whether a move on a given board for a given piece legal or not
     public abstract boolean valid_move(piece board[][], point origin, point destination);
