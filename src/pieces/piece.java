@@ -19,7 +19,7 @@ public abstract class piece {
     char promo;
     // Check if pawn eligible for enpassant
     boolean enpass;
-    // check if rook eligible for castling
+    // check if king eligible for castling
     char castling;
 
     public piece(char name, boolean isBlack) {

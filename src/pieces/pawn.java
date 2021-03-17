@@ -18,6 +18,7 @@ public class pawn extends piece{
 
     @Override
     public boolean valid_move(piece[][] board, point origin, point destination) {
+
         // coordinates for origin and destination
         int originX = origin.getX();
         int originY = origin.getY();
@@ -34,6 +35,7 @@ public class pawn extends piece{
             return false;
         }
 
+        // moving up or down spaces
         if (spacesY == 0 && board[destX][destY] == null) {
             if(spacesX == 1) {
                 first_move = false;
@@ -77,5 +79,16 @@ public class pawn extends piece{
         }
         enpass = false;
         return false;
+    }
+    public piece promotion() {
+        // refer to the promotion variable to figure out which piece to promote to
+        if (promo == 'R')
+            return new rook(getIsBlack());
+        else if (promo == 'N')
+            return  new knight(getIsBlack());
+        else if (promo == 'B')
+            return new bishop(getIsBlack());
+        else
+            return new queen(getIsBlack());
     }
 }
