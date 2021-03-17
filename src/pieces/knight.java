@@ -20,7 +20,7 @@ public class knight extends piece{
         int spacesY = Math.abs(originY - destY);
 
         // check if landing on the same color piece
-        if (board[destX][destY].getIsBlack() == getIsBlack())
+        if (board[destX][destY]!=null && board[destX][destY].getIsBlack() == getIsBlack())
             return false;
 
         // valid movement

@@ -21,7 +21,7 @@ public class bishop extends piece{
         int spacesY = Math.abs(originY - destY);
 
         // check to make sure not attacking same color piece
-        if (board[destX][destY].getIsBlack() == getIsBlack())
+        if (board[destX][destY]!=null && board[destX][destY].getIsBlack() == getIsBlack())
             return false;
 
         // check to make sure the movement is diagonal
@@ -30,28 +30,19 @@ public class bishop extends piece{
 
             // movement is top and right
             if (destX > originX && destY > originY) {
-                for (int i = originX, j = originY; i < destX && j < destY; i++, j++)
+                for (int i = originX+1, j = originY+1; i < destX && j < destY; i++, j++)
                     if (board[i][j] != null)
                         return false;
-            }
-
-            // movement is top and left
-            if (destX > originX && destY < originY) {
-                for (int i = originX, j = originY; i < destX && j > destY; i++, j--)
+            } else if (destX > originX+1 && destY < originY+1) { // movement is top and left
+                for (int i = originX+1, j = originY+1; i < destX && j > destY; i++, j--)
                     if (board[i][j] != null)
                         return false;
-            }
-
-            // movement is bottom and left
-            if (destX < originX && destY < originY) {
-                for (int i = originX, j = originY; i > destX && j > destY; i--, j--)
+            }else if (destX < originX+1 && destY < originY+1) {// movement is bottom and left
+                for (int i = originX+1, j = originY+1; i > destX && j > destY; i--, j--)
                     if (board[i][j] != null)
                         return false;
-            }
-
-            // movement is bottom and right
-            if (destX < originX && destY > originY) {
-                for (int i = originX, j = originY; i > destX && j < destY; i--, j++)
+            }else {// movement is bottom and right
+                for (int i = originX+1, j = originY+1; i > destX && j < destY; i--, j++)
                     if (board[i][j] != null)
                         return false;
             }

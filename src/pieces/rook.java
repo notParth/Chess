@@ -23,19 +23,19 @@ public class rook extends piece{
         if (spacesX > 0 && spacesY > 0)
             return false;
         // check to make sure not landing on same color piece
-        if (board[destX][destY].getIsBlack() == getIsBlack())
+        if (board[destX][destY]!=null && board[destX][destY].getIsBlack() == getIsBlack())
             return false;
         // check to make sure no obstacles in between
         if (spacesX == 0 && spacesY > 0) {
             // moving right
             if (originY < destY) {
-                for (int i = originY; i < destY; i++)
+                for (int i = originY+1; i < destY; i++)
                     if (board[originX][i] != null)
                         return false;
             }
             // moving left
             else {
-                for (int i = originY; i > destY; i--)
+                for (int i = originY+1; i > destY; i--)
                     if (board[originX][i] != null)
                         return false;
             }
@@ -45,13 +45,13 @@ public class rook extends piece{
         if (spacesX > 0 && spacesY == 0) {
             // moving up
             if (originX < destX) {
-                for (int i = originX; i < destX; i++)
+                for (int i = originX+1; i < destX; i++)
                     if (board[i][originY] != null)
                         return false;
             }
             // moving down
             else {
-                for (int i = originX; i > destX; i--)
+                for (int i = originX+1; i > destX; i--)
                     if (board[i][originY] != null)
                         return false;
             }
