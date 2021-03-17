@@ -5,7 +5,7 @@ import main.point;
 public class bishop extends piece{
 
     public bishop(boolean isBlack){
-        super('B', isBlack);
+        super("bishop", isBlack);
     }
     @Override
     public boolean valid_move(piece[][] board, point origin, point destination) {

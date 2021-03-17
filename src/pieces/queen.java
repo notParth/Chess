@@ -4,7 +4,7 @@ import main.point;
 
 public class queen extends piece{
 
-    public queen(boolean isBlack){ super('Q', isBlack); }
+    public queen(boolean isBlack){ super("queen", isBlack); }
     @Override
     public boolean valid_move(piece[][] board, point origin, point destination) {
         // coordinates for origin and destination

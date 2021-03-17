@@ -5,7 +5,7 @@ import main.point;
 public class king extends piece{
 
     public king(boolean isBlack) {
-        super('K', isBlack);
+        super("king", isBlack);
         first_move = true;
         castling = true;
     }

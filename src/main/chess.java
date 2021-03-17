@@ -24,9 +24,15 @@ public class chess {
                         point destination = new point(points[1]);
                         System.out.println(origin + "" + destination);
 
+                        //check if move is in bounds of board
+                        if(origin.getX()<0 || origin.getX()>7 || origin.getY()<0 || origin.getY()>7){
+                            System.out.println("This move is not valid; it is out of bounds. Please re-enter your move.");
+                            continue;
+                        }
+
                         //check if existing piece at origin
                         if (game.getPiece(origin) == null || game.getPiece(origin).getIsBlack()) {
-                            System.out.println("This move is not valid; a white piece does not exist at " + origin + ". Please re-enter your move:");
+                            System.out.println("This move is not valid; a white piece does not exist at " + origin + ". Please re-enter your move.");
                             continue;
                         }
 
@@ -37,7 +43,6 @@ public class chess {
 
                         //check if move is valid
                         boolean isValid = game.b[origin.getX()][origin.getY()].valid_move(game.b, origin, destination);
-                        System.out.println("isValid: "+isValid);//debug
                         if(!isValid){
                             System.out.println("This move is not valid.");
                             continue;
@@ -46,6 +51,12 @@ public class chess {
                         //print result of move (note: implement capture)
                         String c = capture ? "; captured "+game.getPiece(destination) : "";
                         System.out.println("Successfully moved "+game.getPiece(origin)+" from "+origin+" to " +destination+c);
+
+                        //move piece
+                        game.b[destination.getX()][destination.getY()] = game.b[origin.getX()][origin.getY()];
+                        game.b[origin.getX()][origin.getY()] = null;
+
+                        //set vars
                         moveInProgress = false;
                         moveCount++;
                     }

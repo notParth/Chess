@@ -4,7 +4,7 @@ import main.point;
 
 public class knight extends piece{
 
-    public knight(boolean isBlack){ super('N', isBlack); }
+    public knight(boolean isBlack){ super("knight", isBlack); }
 
     @Override
     public boolean valid_move(piece[][] board, point origin, point destination) {
@@ -24,11 +24,9 @@ public class knight extends piece{
             return false;
 
         // valid movement
-        if (spacesX == 1 && spacesY == 2)
+        if (spacesX == 1 && spacesY == 2){
             return true;
-        if (spacesX == 2 && spacesY == 1)
-            return true;
-
-        return false;
+        }
+        return spacesX == 2 && spacesY == 1;
     }
 }

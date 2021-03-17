@@ -10,7 +10,7 @@ import java.util.List;
 public abstract class piece {
 
     // 'p' for pawn, 'Q' for queen etc...
-    char name;
+    String name;
     // True for a black piece, False for a white piece
     boolean isBlack;
     // Check if piece has made a first move yet
@@ -22,7 +22,7 @@ public abstract class piece {
     // check if king eligible for castling
     boolean castling;
 
-    public piece(char name, boolean isBlack) {
+    public piece(String name, boolean isBlack) {
         this.name = name;
         this.isBlack = isBlack;
     }
@@ -30,7 +30,7 @@ public abstract class piece {
     public boolean getIsBlack(){
         return this.isBlack;
     }
-    public char getName() { return this.name; }
+    public String getName() { return this.name; }
     public boolean isFirst_move() { return this.first_move; }
     public char getPromo() { return this.promo; }
     public boolean getEnpass() { return  this.enpass; }
@@ -45,5 +45,5 @@ public abstract class piece {
     }
 
     // This methods validates whether a move on a given board for a given piece legal or not
-    public abstract boolean valid_move(piece board[][], point origin, point destination);
+    public abstract boolean valid_move(piece[][] board, point origin, point destination);
 }

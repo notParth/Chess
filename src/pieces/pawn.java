@@ -11,7 +11,7 @@ public class pawn extends piece{
     boolean double_step;
 
     public pawn(boolean isBlack) {
-        super('p', isBlack);
+        super("pawn", isBlack);
         first_move = true;
         double_step = false;
     }
@@ -70,7 +70,7 @@ public class pawn extends piece{
             }
             // en passant
             piece adjacent = board[destX][originY];
-            if (adjacent != null && adjacent instanceof pawn && adjacent.getIsBlack()!=getIsBlack()
+            if (adjacent instanceof pawn && adjacent.getIsBlack()!=getIsBlack()
                     && ((pawn)adjacent).double_step){
                 enpass = true;
                 return true;
