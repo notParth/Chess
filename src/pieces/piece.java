@@ -36,6 +36,14 @@ public abstract class piece {
     public boolean getEnpass() { return  this.enpass; }
     public boolean getCastling() {return this.castling; }
 
+    @Override
+    public String toString() {
+        if (isBlack) {
+            return "black " + this.name;
+        }
+        return "white " + this.name;
+    }
+
     // This methods validates whether a move on a given board for a given piece legal or not
     public abstract boolean valid_move(piece board[][], point origin, point destination);
 }

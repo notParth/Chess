@@ -9,6 +9,11 @@ public class point {
         this.y = y;
     }
 
+    public point(String s){
+        this.x = s.charAt(0)-97;
+        this.y = s.charAt(1)-49;
+    }
+
     public int getX(){
         return this.x;
     }
@@ -19,9 +24,6 @@ public class point {
 
     @Override
     public String toString() {
-        return "point{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
+        return ""+(char)(x+97)+(char)(y+49)+" ("+x+","+y+")";
     }
 }
