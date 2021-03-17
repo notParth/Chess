@@ -20,7 +20,7 @@ public abstract class piece {
     // Check if pawn eligible for enpassant
     boolean enpass;
     // check if king eligible for castling
-    char castling;
+    boolean castling;
 
     public piece(char name, boolean isBlack) {
         this.name = name;

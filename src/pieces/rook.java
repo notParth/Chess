@@ -19,7 +19,7 @@ public class rook extends piece{
         int spacesX = Math.abs(originX - destX);
         int spacesY = Math.abs(originY - destY);
 
-        //  check to make sure the move is unidirectional
+        //  check to make sure the move is unidirectional (unnecessary)
         if (spacesX > 0 && spacesY > 0)
             return false;
         // check to make sure not landing on same color piece
