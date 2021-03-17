@@ -5,6 +5,9 @@ public class board {
     // 2D array
     public piece[][] b;
 
+    /**
+     * Class Constructor setting up default chessboard with white/black pieces.
+     */
     public board() {
         b = new piece[8][8];
 
@@ -35,6 +38,11 @@ public class board {
         }
     }
 
+    /**
+     * Gets the piece at a given point.
+     * @param p The target point on the chessboard.
+     * @return The piece currently at point p.
+     */
     public piece getPiece(point p){
         //System.out.println(b[p.getX()][p.getY()]); debug
         return b[p.getX()][p.getY()];
