@@ -29,7 +29,7 @@ public class pawn extends piece{
         int spacesY = Math.abs(originY - destY);
 
         // check to make sure same colored pieces do not interact
-        if (board[destX][destY]==null || board[destX][destY].getIsBlack() == getIsBlack()) {
+        if (board[destX][destY]!=null && board[destX][destY].getIsBlack() == getIsBlack()) {
             enpass = false;
             return false;
         }
