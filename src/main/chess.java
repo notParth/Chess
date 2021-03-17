@@ -22,6 +22,7 @@ public class chess {
                         String[] points = move.split(",");
                         point origin = new point(points[0]);
                         point destination = new point(points[1]);
+                        System.out.println(origin + "" + destination);
 
                         //check if existing piece at origin
                         if (game.getPiece(origin) == null || game.getPiece(origin).getIsBlack()) {

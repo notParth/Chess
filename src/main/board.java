@@ -10,28 +10,28 @@ public class board {
 
         // setting the white pieces
         b[0][0] = new rook(false);
-        b[1][0] = new knight(false);
-        b[2][0] = new bishop(false);
-        b[3][0] = new king(false);
-        b[4][0] = new queen(false);
-        b[5][0] = new bishop(false);
-        b[6][0] = new knight(false);
-        b[7][0] = new rook(false);
+        b[0][1] = new knight(false);
+        b[0][2] = new bishop(false);
+        b[0][3] = new king(false);
+        b[0][4] = new queen(false);
+        b[0][5] = new bishop(false);
+        b[0][6] = new knight(false);
+        b[0][7] = new rook(false);
         for(int i=0; i<8; i++){
-            b[i][1] = new pawn(false);
+            b[1][i] = new pawn(false);
         }
 
         // setting the black pieces
-        b[0][7] = new rook(true);
-        b[1][7] = new knight(true);
-        b[2][7] = new bishop(true);
-        b[3][7] = new king(true);
-        b[4][7] = new queen(true);
-        b[5][7] = new bishop(true);
-        b[6][7] = new knight(true);
+        b[7][0] = new rook(true);
+        b[7][1] = new knight(true);
+        b[7][2] = new bishop(true);
+        b[7][3] = new king(true);
+        b[7][4] = new queen(true);
+        b[7][5] = new bishop(true);
+        b[7][6] = new knight(true);
         b[7][7] = new rook(true);
         for(int i=0; i<8; i++){
-            b[i][6] = new pawn(true);
+            b[6][i] = new pawn(true);
         }
     }
 

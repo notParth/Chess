@@ -18,7 +18,6 @@ public class pawn extends piece{
 
     @Override
     public boolean valid_move(piece[][] board, point origin, point destination) {
-
         // coordinates for origin and destination
         int originX = origin.getX();
         int originY = origin.getY();
