@@ -17,6 +17,7 @@ public class chess {
                     while (moveInProgress) {
                         boolean capture = false;
                         boolean isBlack = moveCount % 2 != 1;
+                        game.display();
                         //get user input
                         String color = isBlack ? "black" : "white";
                         System.out.println("Move "+moveCount+"--Player 1 ("+color+"), please enter your move in the format origin,destination' (e.g. a2,a4):");

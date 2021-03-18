@@ -5,7 +5,7 @@ import main.point;
 public class king extends piece{
 
     public king(boolean isBlack) {
-        super("king", isBlack);
+        super("K", isBlack);
         first_move = true;
         castling = true;
     }
@@ -22,7 +22,7 @@ public class king extends piece{
         int spacesY = Math.abs(originY - destY);
 
         // check to make sure not landing on same color piece
-        if (board[destX][destY].getIsBlack() == getIsBlack())
+        if (board[destX][destY]!=null && board[destX][destY].getIsBlack() == getIsBlack())
             return false;
 
         if ((spacesX == 1 && spacesY == 0) || (spacesX == 0 && spacesY == 1) || (spacesX == 1 && spacesY == 1)){
@@ -31,6 +31,12 @@ public class king extends piece{
             return true;
         }
         // implement castling
+        if (spacesY == 2 && spacesX == 0 && first_move){
+            piece rightRook = board[originX][7];
+            piece leftRook = board[originX][0];
+            // incomplete
+        }
+
         return false;
     }
 }

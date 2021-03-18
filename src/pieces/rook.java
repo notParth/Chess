@@ -4,7 +4,7 @@ import main.point;
 
 public class rook extends piece{
     public rook(boolean isBlack){
-        super("rook", isBlack);
+        super("R", isBlack);
         first_move = true;
     }
     @Override

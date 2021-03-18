@@ -11,9 +11,10 @@ public class pawn extends piece{
     boolean double_step;
 
     public pawn(boolean isBlack) {
-        super("pawn", isBlack);
+        super("p", isBlack);
         first_move = true;
         double_step = false;
+        enpass = false;
     }
 
     @Override
@@ -28,9 +29,29 @@ public class pawn extends piece{
         int spacesX = Math.abs(originX - destX);
         int spacesY = Math.abs(originY - destY);
 
+        // check for diagonal capture + enpassant
+        if (spacesX == 1 && spacesY == 1) {
+            if(board[destX][destY]!=null && board[destX][destY].getIsBlack()!=getIsBlack()) {
+                // promotion check
+                if ((board[originX][originY].getIsBlack() && destX == 0)
+                        || (!board[originX][originY].getIsBlack() && destX == 7))
+                    board[originX][originY] = promotion();
+                return true;
+            }
+            // en passant
+            piece adjacent = board[originX][destY];
+            if (adjacent != null && adjacent instanceof pawn && adjacent.getIsBlack()!=getIsBlack()
+                    && ((pawn)adjacent).double_step){
+                board[originX][destY] = null;
+                if ((board[originX][originY].getIsBlack() && destX == 0)
+                        || (!board[originX][originY].getIsBlack() && destX == 7))
+                    board[originX][originY] = promotion();
+                return true;
+            }
+        }
+
         // check to make sure same colored pieces do not interact
         if (board[destX][destY]!=null && board[destX][destY].getIsBlack() == getIsBlack()) {
-            enpass = false;
             return false;
         }
 
@@ -41,8 +62,8 @@ public class pawn extends piece{
                 // promotion check
                 if ((board[originX][originY].getIsBlack() && destX == 0)
                         || (!board[originX][originY].getIsBlack() && destX == 7))
-                    // figure out
-                enpass = false;
+                    board[originX][originY] = promotion();
+                double_step = false;
                 return true;
 
             }
@@ -52,31 +73,12 @@ public class pawn extends piece{
                 if (board[step][originY] == null) {
                     first_move = false;
                     double_step = true;
-                    enpass = false;
+                    enpass = true;
                     return true;
                 }
             }
         }
 
-        // check for diagonal capture + enpassant
-        if (spacesX == 1 && spacesY == 1) {
-            if(board[destX][destY]!=null && board[destX][destY].getIsBlack()!=getIsBlack()) {
-                // promotion check
-                if ((board[originX][originY].getIsBlack() && destX == 0)
-                        || (!board[originX][originY].getIsBlack() && destX == 7))
-                    // figure out
-                enpass = false;
-                return true;
-            }
-            // en passant
-            piece adjacent = board[destX][originY];
-            if (adjacent instanceof pawn && adjacent.getIsBlack()!=getIsBlack()
-                    && ((pawn)adjacent).double_step){
-                enpass = true;
-                return true;
-            }
-        }
-        enpass = false;
         return false;
     }
     public piece promotion() {
