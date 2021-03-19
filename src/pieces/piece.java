@@ -18,7 +18,7 @@ public abstract class piece {
     // Check if pawn eligible for promotion
     char promo;
     // Check if pawn eligible for enpassant
-    boolean enpass;
+    public boolean enpass;
     // check if king eligible for castling
     boolean castling;
 

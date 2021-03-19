@@ -35,7 +35,7 @@ public class rook extends piece{
             }
             // moving left
             else {
-                for (int i = originY+1; i > destY; i--)
+                for (int i = originY-1; i > destY; i--)
                     if (board[originX][i] != null)
                         return false;
             }
@@ -51,7 +51,7 @@ public class rook extends piece{
             }
             // moving down
             else {
-                for (int i = originX+1; i > destX; i--)
+                for (int i = originX-1; i > destX; i--)
                     if (board[i][originY] != null)
                         return false;
             }

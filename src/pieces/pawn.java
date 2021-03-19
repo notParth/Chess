@@ -56,7 +56,12 @@ public class pawn extends piece{
         }
 
         // moving up or down spaces
-        if (spacesY == 0 && board[destX][destY] == null) {
+        if (spacesY == 0 && board[destX][destY] == null) {//cant move backwards
+            if((originX - destX < 0) && board[originX][originY].getIsBlack()){
+                return false;
+            } else if(originX - destX > 0 && !board[originX][originY].getIsBlack()){
+                return false;
+            }
             if(spacesX == 1) {
                 first_move = false;
                 // promotion check

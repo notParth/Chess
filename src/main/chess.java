@@ -1,5 +1,7 @@
 package main;
 
+import pieces.king;
+import pieces.pawn;
 import pieces.piece;
 
 import java.util.Scanner;
@@ -11,8 +13,10 @@ public class chess {
             System.out.println("Start game? (yes/no)");
             if (s.nextLine().equals("yes")) {
                 board game = new board();
+                boolean isCheck = false;
+                boolean isCheckmate = false;
                 int moveCount = 1;
-                while (!game.isCheckmate()) {
+                while (!isCheckmate) {
                     boolean moveInProgress = true;
                     while (moveInProgress) {
                         boolean capture = false;
@@ -39,9 +43,15 @@ public class chess {
                             continue;
                         }
 
-                        //check if existing enemy piece at destination
-                        if(game.getPiece(destination) !=null && (game.getPiece(destination).getIsBlack()!=isBlack)){
+                        //check for capture
+                        if(game.getPiece(destination) !=null && (game.getPiece(destination).getIsBlack()!=isBlack)){ //if existing enemy piece at destination
                             capture = true;
+                        }
+
+                        boolean enpass = false; //handle en passant
+                        piece adjacent = game.b[origin.getX()][destination.getY()]; //if en passant
+                        if(adjacent instanceof pawn && adjacent.getEnpass()){
+                            enpass = true;
                         }
 
                         //check if move is valid
@@ -51,23 +61,117 @@ public class chess {
                             continue;
                         }
 
+                        if(game.b[origin.getX()][destination.getY()]!=null){
+                            enpass = false;
+                        }
+
                         //print result of move (note: implement capture)
                         String c = capture ? "; captured "+game.getPiece(destination) : "";
+                        c = enpass ? "; enpass: captured "+(game.getPiece(origin).getIsBlack() ? "white p" : "black p") : c;
                         System.out.println("Successfully moved "+game.getPiece(origin)+" from "+origin+" to " +destination+c+"\n");
 
                         //move piece
                         game.b[destination.getX()][destination.getY()] = game.b[origin.getX()][origin.getY()];
                         game.b[origin.getX()][origin.getY()] = null;
 
+
+                        //check
+                        point kingPos = null;
+                        for(int i=0; i<8; i++){ //set enpass = false
+                            for(int j=0; j<8; j++){
+                                if(game.b[i][j] instanceof king && (game.b[i][j].getIsBlack()!=isBlack)){
+                                    kingPos = new point(i,j);
+                                    isCheck = check(game.b, kingPos);
+                                    break;
+                                }
+                            }
+                        }
+
+                        //checkmate
+                        if(isCheck){
+                            System.out.println("Check!!");
+                            isCheckmate = checkmate(game.b, kingPos);
+                            if(isCheckmate){
+                                System.out.println("Checkmate!! Game over, "+color+" wins!!");
+                                break;
+                            }
+                        }
+
+
+
                         //set vars
+                        for(int i=0; i<8; i++){ //set enpass = false
+                            for(int j=0; j<8; j++){
+                                if(game.b[i][j] instanceof pawn && (game.b[i][j].getIsBlack()!=isBlack)){
+                                    game.b[i][j].enpass = false;
+                                }
+                            }
+                        }
                         moveInProgress = false;
                         moveCount++;
                     }
 
+
+                }
+            }
+        }
+    }
+
+    public static boolean check(piece[][] board, point destination){
+        for(int i=0; i<8; i++){ //set enpass = false
+            for(int j=0; j<8; j++){
+                if(board[i][j] != null && (board[i][j].getIsBlack() != board[destination.getX()][destination.getY()].getIsBlack())){
+                    point origin = new point(i,j);
+                    if(board[i][j].valid_move(board, origin, destination)){
+                        //System.out.println("CHECK!!!");
+                        return true;
                     }
                 }
             }
         }
-
-
+        return false;
     }
+
+    public static boolean checkmate(piece[][]board, point destination){
+        boolean isBlack = board[destination.getX()][destination.getY()].getIsBlack();
+        for(int i=0; i<8; i++){
+            for(int j=0; j<8; j++){
+                if(board[i][j] != null && (board[i][j].getIsBlack() == board[destination.getX()][destination.getY()].getIsBlack())){ //samecolored pieces
+                    for(int k=0; k<8; k++){
+                        for(int l=0; l<8; l++){
+                            point hOrig = new point(i,j);
+                            point hDest = new point(k,l);
+                            if(board[i][j].valid_move(board, hOrig, hDest)){ //valid move
+                                //System.out.println(hDest);
+                                board[hDest.getX()][hDest.getY()] = board[hOrig.getX()][hOrig.getY()];
+                                board[hOrig.getX()][hOrig.getY()] = null;
+                                //find kingpos
+                                point kingPos = null;
+                                for(int a=0; a<8; a++){ //set enpass = false
+                                    for(int b=0; b<8; b++){
+                                        if(board[a][b] instanceof king && (isBlack==board[a][b].getIsBlack())){
+                                            kingPos = new point(a,b);
+                                            break;
+                                        }
+                                    }
+                                }
+                                boolean isCheck = check(board, kingPos);
+                                board[hOrig.getX()][hOrig.getY()] = board[hDest.getX()][hDest.getY()];
+                                board[hDest.getX()][hDest.getY()] = null;
+                                if(!isCheck){
+                                    System.out.println("Escaped checkmate with "+board[hOrig.getX()][hOrig.getY()]+" from "+hOrig+" to " +hDest);
+                                    return false;
+                                }
+                            }
+
+                        }
+                    }
+
+                }
+            }
+        }
+        //System.out.println("CHECKMATE!!!");
+        return true;
+    }
+
+}

@@ -29,20 +29,21 @@ public class bishop extends piece{
             // check to make sure the path is empty
 
             // movement is top and right
+            // movement is top and right
             if (destX > originX && destY > originY) {
                 for (int i = originX+1, j = originY+1; i < destX && j < destY; i++, j++)
                     if (board[i][j] != null)
                         return false;
-            } else if (destX > originX+1 && destY < originY+1) { // movement is top and left
-                for (int i = originX+1, j = originY+1; i < destX && j > destY; i++, j--)
+            } else if (destX > originX && destY < originY) { // movement is top and left
+                for (int i = originX+1, j = originY-1; i < destX && j > destY; i++, j--)
                     if (board[i][j] != null)
                         return false;
-            }else if (destX < originX+1 && destY < originY+1) {// movement is bottom and left
-                for (int i = originX+1, j = originY+1; i > destX && j > destY; i--, j--)
+            }else if (destX < originX && destY < originY) {// movement is bottom and left
+                for (int i = originX-1, j = originY-1; i > destX && j > destY; i--, j--)
                     if (board[i][j] != null)
                         return false;
             }else {// movement is bottom and right
-                for (int i = originX+1, j = originY+1; i > destX && j < destY; i--, j++)
+                for (int i = originX-1, j = originY+1; i > destX && j < destY; i--, j++)
                     if (board[i][j] != null)
                         return false;
             }
