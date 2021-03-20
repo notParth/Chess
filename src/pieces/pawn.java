@@ -1,6 +1,6 @@
 package pieces;
 import main.*;
-/*
+/**
  * @author Parth Patel
  * @author Amanda Kang
  */
@@ -14,7 +14,6 @@ public class pawn extends piece{
         super("p", isBlack);
         first_move = true;
         double_step = false;
-        enpass = false;
     }
 
     @Override
@@ -36,6 +35,7 @@ public class pawn extends piece{
                 if ((board[originX][originY].getIsBlack() && destX == 0)
                         || (!board[originX][originY].getIsBlack() && destX == 7))
                     board[originX][originY] = promotion();
+                first_move = false;
                 return true;
             }
             // en passant
@@ -46,6 +46,7 @@ public class pawn extends piece{
                 if ((board[originX][originY].getIsBlack() && destX == 0)
                         || (!board[originX][originY].getIsBlack() && destX == 7))
                     board[originX][originY] = promotion();
+                first_move = false;
                 return true;
             }
         }
@@ -68,7 +69,6 @@ public class pawn extends piece{
                 if ((board[originX][originY].getIsBlack() && destX == 0)
                         || (!board[originX][originY].getIsBlack() && destX == 7))
                     board[originX][originY] = promotion();
-                double_step = false;
                 return true;
 
             }
@@ -78,7 +78,6 @@ public class pawn extends piece{
                 if (board[step][originY] == null) {
                     first_move = false;
                     double_step = true;
-                    enpass = true;
                     return true;
                 }
             }
@@ -88,11 +87,11 @@ public class pawn extends piece{
     }
     public piece promotion() {
         // refer to the promotion variable to figure out which piece to promote to
-        if (promo == 'R')
+        if (promo.equals("R"))
             return new rook(getIsBlack());
-        else if (promo == 'N')
+        else if (promo.equals("N"))
             return  new knight(getIsBlack());
-        else if (promo == 'B')
+        else if (promo.equals("B"))
             return new bishop(getIsBlack());
         else
             return new queen(getIsBlack());

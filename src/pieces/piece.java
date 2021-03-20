@@ -16,11 +16,7 @@ public abstract class piece {
     // Check if piece has made a first move yet
     boolean first_move;
     // Check if pawn eligible for promotion
-    char promo;
-    // Check if pawn eligible for enpassant
-    public boolean enpass;
-    // check if king eligible for castling
-    boolean castling;
+    String promo;
 
     public piece(String name, boolean isBlack) {
         this.name = name;
@@ -32,9 +28,9 @@ public abstract class piece {
     }
     public String getName() { return this.name; }
     public boolean isFirst_move() { return this.first_move; }
-    public char getPromo() { return this.promo; }
-    public boolean getEnpass() { return  this.enpass; }
-    public boolean getCastling() {return this.castling; }
+    public String getPromo() { return this.promo; }
+
+    public void setPromo(String promo) { this.promo = promo; }
 
     @Override
     public String toString() {

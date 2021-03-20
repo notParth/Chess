@@ -50,7 +50,7 @@ public class chess {
 
                         boolean enpass = false; //handle en passant
                         piece adjacent = game.b[origin.getX()][destination.getY()]; //if en passant
-                        if(adjacent instanceof pawn && adjacent.getEnpass()){
+                        if(adjacent instanceof pawn ){ // && adjacent.getEnpass()
                             enpass = true;
                         }
 
@@ -103,7 +103,7 @@ public class chess {
                         for(int i=0; i<8; i++){ //set enpass = false
                             for(int j=0; j<8; j++){
                                 if(game.b[i][j] instanceof pawn && (game.b[i][j].getIsBlack()!=isBlack)){
-                                    game.b[i][j].enpass = false;
+                                    // game.b[i][j].enpass = false;
                                 }
                             }
                         }

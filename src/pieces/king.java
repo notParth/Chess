@@ -7,7 +7,6 @@ public class king extends piece{
     public king(boolean isBlack) {
         super("K", isBlack);
         first_move = true;
-        castling = true;
     }
     @Override
     public boolean valid_move(piece[][] board, point origin, point destination) {
@@ -27,14 +26,40 @@ public class king extends piece{
 
         if ((spacesX == 1 && spacesY == 0) || (spacesX == 0 && spacesY == 1) || (spacesX == 1 && spacesY == 1)){
             first_move = false;
-            castling = false;
             return true;
         }
         // implement castling
         if (spacesY == 2 && spacesX == 0 && first_move){
             piece rightRook = board[originX][7];
             piece leftRook = board[originX][0];
-            // incomplete
+            if (originY > destY) {
+                if (leftRook != null && leftRook instanceof rook
+                        && leftRook.isFirst_move() && leftRook.getIsBlack() == getIsBlack()) {
+                    for (int i = originY - 1; i > 0; i--) {
+                        if (board[originX][i] != null)
+                            return false;
+                    }
+                    first_move = false;
+                    board[originX][originY-1] = board[originX][0];
+                    board[originX][originY-1].first_move = false;
+                    board[originX][0] = null;
+                    return true;
+                }
+            }
+            else {
+                if (rightRook != null && rightRook instanceof rook
+                        && rightRook.isFirst_move() && rightRook.getIsBlack() == getIsBlack()) {
+                    for (int i = originY + 1; i < 7; i++) {
+                        if (board[originX][i] != null)
+                            return false;
+                    }
+                    first_move = false;
+                    board[originX][originY+1] = board[originX][7];
+                    board[originX][originY+1].first_move = false;
+                    board[originX][7] = null;
+                    return true;
+                }
+            }
         }
 
         return false;
