@@ -75,6 +75,20 @@ public class board {
         return b[p.getX()][p.getY()];
     }
 
+    public board copyBoard(){
+        board newGame = new board();
+        for(int i=0; i<8; i++){
+            for(int j=0; j<8; j++){
+                if(this.b[i][j] == null){
+                    newGame.b[i][j] = null;
+                } else{
+                    newGame.b[i][j] = this.b[i][j].copy();
+                }
+            }
+        }
+        return newGame;
+    }
+
     public boolean isCheckmate(){
         return false; //implement
     }

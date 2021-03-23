@@ -53,6 +53,8 @@ public abstract class piece {
 
     public void setPromo(String promo) { this.promo = promo; }
 
+
+
     @Override
     public String toString() {
         if (isBlack) {
@@ -65,10 +67,11 @@ public abstract class piece {
 
     /**
      * This method validates whether a move on a given board for a given piece is legal or not
-     * @param board A chess board with a given state
+     * @param game A chess board with a given state
      * @param origin The origin of the move
      * @param destination The destination of the move
      * @return Whether or not the move is valid
      */
-    public abstract boolean valid_move(piece[][] board, point origin, point destination);
+    public abstract boolean valid_move(board game, point origin, point destination);
+    public abstract piece copy();
 }

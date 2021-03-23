@@ -1,5 +1,5 @@
 package main;
-
+/*
 import pieces.king;
 import pieces.pawn;
 import pieces.piece;
@@ -142,7 +142,6 @@ public class chess {
                             point hOrig = new point(i,j);
                             point hDest = new point(k,l);
                             if(board[i][j].valid_move(board, hOrig, hDest)){ //valid move
-                                //System.out.println(hDest);
                                 board[hDest.getX()][hDest.getY()] = board[hOrig.getX()][hOrig.getY()];
                                 board[hOrig.getX()][hOrig.getY()] = null;
                                 //find kingpos
@@ -170,8 +169,8 @@ public class chess {
                 }
             }
         }
-        //System.out.println("CHECKMATE!!!");
         return true;
     }
 
 }
+*/
