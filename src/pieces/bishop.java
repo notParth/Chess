@@ -2,11 +2,28 @@ package pieces;
 
 import main.point;
 
-public class bishop extends piece{
+/**
+ * Represents a bishop piece
+ * @author Parth Patel
+ * @author Amanda Kang
+ */
 
+public class bishop extends piece{
+    /**
+     * Creates an instance of bishop
+     * @param isBlack the color of bishop
+     */
     public bishop(boolean isBlack){
         super("B", isBlack);
     }
+
+    /**
+     * Check if a move for the bishop on a given board valid or not
+     * @param board A chess board with a given state
+     * @param origin The origin of the move
+     * @param destination The destination of the move
+     * @return
+     */
     @Override
     public boolean valid_move(piece[][] board, point origin, point destination) {
 

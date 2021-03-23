@@ -1,11 +1,11 @@
 package pieces;
 import main.*;
-/*
+
+/**
+ * Represent a chess piece
  * @author Parth Patel
  * @author Amanda Kang
  */
-
-import java.util.List;
 
 public abstract class piece {
 
@@ -18,16 +18,37 @@ public abstract class piece {
     // Check if pawn eligible for promotion
     String promo;
 
+    /**
+     * Create a piece with a given name and coloe
+     * @param name Can be anything from (K)ing, (Q)ueen, (p)awn, k(N)ight, (B)ishop or (R)ook
+     * @param isBlack true for black piece and false for white
+     */
     public piece(String name, boolean isBlack) {
         this.name = name;
         this.isBlack = isBlack;
     }
 
+    /**
+     * @return The color of the piece
+     */
     public boolean getIsBlack(){
         return this.isBlack;
     }
+
+    /**
+     * @return The name of the piece
+     */
     public String getName() { return this.name; }
+
+    /**
+     * @return Whether or not the piece has taken its first move.
+     */
     public boolean isFirst_move() { return this.first_move; }
+
+    /**
+     * Used for promotion of a pawn
+     * @return the piece pawn gets promoted to
+     */
     public String getPromo() { return this.promo; }
 
     public void setPromo(String promo) { this.promo = promo; }
@@ -41,5 +62,13 @@ public abstract class piece {
     }
 
     // This methods validates whether a move on a given board for a given piece legal or not
+
+    /**
+     * This method validates whether a move on a given board for a given piece is legal or not
+     * @param board A chess board with a given state
+     * @param origin The origin of the move
+     * @param destination The destination of the move
+     * @return Whether or not the move is valid
+     */
     public abstract boolean valid_move(piece[][] board, point origin, point destination);
 }

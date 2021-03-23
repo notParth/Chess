@@ -1,6 +1,8 @@
 package pieces;
 import main.*;
+
 /**
+ * Represents a pawn piece
  * @author Parth Patel
  * @author Amanda Kang
  */
@@ -10,12 +12,23 @@ public class pawn extends piece{
     // used for enpassant
     boolean double_step;
 
+    /**
+     * Creates an instance of pawn
+     * @param isBlack color of the pawn
+     */
     public pawn(boolean isBlack) {
         super("p", isBlack);
         first_move = true;
         double_step = false;
     }
 
+    /**
+     * Check if a move for the pawn on a given board valid or not
+     * @param board A chess board with a given state
+     * @param origin The origin of the move
+     * @param destination The destination of the move
+     * @return
+     */
     @Override
     public boolean valid_move(piece[][] board, point origin, point destination) {
         // coordinates for origin and destination
@@ -85,6 +98,11 @@ public class pawn extends piece{
 
         return false;
     }
+
+    /**
+     * This method is used for promotion of a pawn
+     * @return the piece the player wants to promote the pawn to
+     */
     public piece promotion() {
         // refer to the promotion variable to figure out which piece to promote to
         if (promo.equals("R"))

@@ -2,9 +2,26 @@ package pieces;
 
 import main.point;
 
-public class queen extends piece{
+/**
+ * Represents a queen piece
+ * @author Parth Patel
+ * @author Amanda Kang
+ */
 
+public class queen extends piece{
+    /**
+     * Creates an instance of queen
+     * @param isBlack color of queen
+     */
     public queen(boolean isBlack){ super("Q", isBlack); }
+
+    /**
+     * Check if a move for the queen on a given board valid or not
+     * @param board A chess board with a given state
+     * @param origin The origin of the move
+     * @param destination The destination of the move
+     * @return
+     */
     @Override
     public boolean valid_move(piece[][] board, point origin, point destination) {
         // coordinates for origin and destination

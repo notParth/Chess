@@ -2,11 +2,30 @@ package pieces;
 
 import main.point;
 
+/**
+ * Represents a rook piece
+ * @author Parth Patel
+ * @author Amanda Kang
+ */
+
+
 public class rook extends piece{
+    /**
+     * Creates an instance of rook
+     * @param isBlack the color of the rook
+     */
     public rook(boolean isBlack){
         super("R", isBlack);
         first_move = true;
     }
+
+    /**
+     * Check if a move for the rook on a given board valid or not
+     * @param board A chess board with a given state
+     * @param origin The origin of the move
+     * @param destination The destination of the move
+     * @return
+     */
     @Override
     public boolean valid_move(piece[][] board, point origin, point destination) {
         // coordinates for origin and destination

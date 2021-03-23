@@ -2,10 +2,26 @@ package pieces;
 
 import main.point;
 
-public class knight extends piece{
+/**
+ * Represents a knight piece
+ * @author Parth Patel
+ * @author Amanda Kang
+ */
 
+public class knight extends piece{
+    /**
+     * Creates an instance of knight
+     * @param isBlack the color of knight
+     */
     public knight(boolean isBlack){ super("N", isBlack); }
 
+    /**
+     * Check if a move for the knight on a given board valid or not
+     * @param board A chess board with a given state
+     * @param origin The origin of the move
+     * @param destination The destination of the move
+     * @return
+     */
     @Override
     public boolean valid_move(piece[][] board, point origin, point destination) {
 
