@@ -7,13 +7,15 @@ import static main.chess_two.check;
 
 /**
  * Represents a king piece
+ *
  * @author Parth Patel
  * @author Amanda Kang
  */
 
-public class king extends piece{
+public class king extends piece {
     /**
      * Creates an instance of king
+     *
      * @param isBlack color of king
      */
     public king(boolean isBlack) {
@@ -21,9 +23,13 @@ public class king extends piece{
         first_move = true;
     }
 
-
+    /**
+     * Creates a copy of a given piece.
+     *
+     * @return The new piece.
+     */
     @Override
-    public piece copy(){
+    public piece copy() {
         king newPiece = new king(this.isBlack);
         newPiece.first_move = this.first_move;
         newPiece.promo = this.promo;
@@ -33,8 +39,9 @@ public class king extends piece{
 
     /**
      * Check if a move for the king on a given board valid or not
-     * @param game A chess board with a given state
-     * @param origin The origin of the move
+     *
+     * @param game        A chess board with a given state
+     * @param origin      The origin of the move
      * @param destination The destination of the move
      * @return
      */
@@ -53,10 +60,10 @@ public class king extends piece{
         int spacesY = Math.abs(originY - destY);
 
         // check to make sure not landing on same color piece
-        if (board[destX][destY]!=null && board[destX][destY].getIsBlack() == getIsBlack())
+        if (board[destX][destY] != null && board[destX][destY].getIsBlack() == getIsBlack())
             return false;
 
-        if ((spacesX == 1 && spacesY == 0) || (spacesX == 0 && spacesY == 1) || (spacesX == 1 && spacesY == 1)){
+        if ((spacesX == 1 && spacesY == 0) || (spacesX == 0 && spacesY == 1) || (spacesX == 1 && spacesY == 1)) {
             first_move = false;
             board newGame = game.copyBoard();
             //simulate move
@@ -65,11 +72,11 @@ public class king extends piece{
 
             //if move leads to check
             point kingPos = null;
-            for(int i=0; i<8; i++){ //set enpass = false
-                for(int j=0; j<8; j++){
-                    if(newGame.b[i][j]!= null && newGame.b[i][j] instanceof king && (newGame.b[i][j].getIsBlack()!=newGame.b[origin.getY()][origin.getY()].isBlack)){
-                        kingPos = new point(i,j);
-                        if(check(newGame, kingPos)){
+            for (int i = 0; i < 8; i++) { //set enpass = false
+                for (int j = 0; j < 8; j++) {
+                    if (newGame.b[i][j] != null && newGame.b[i][j] instanceof king && (newGame.b[i][j].getIsBlack() != newGame.b[origin.getY()][origin.getY()].isBlack)) {
+                        kingPos = new point(i, j);
+                        if (check(newGame, kingPos)) {
                             //System.out.println("Cannot make this move because it puts your king in check: King");
                             return false;
                         }
@@ -80,14 +87,14 @@ public class king extends piece{
             return true;
         }
         // implement castling
-        if (spacesY == 2 && spacesX == 0 && first_move){
+        if (spacesY == 2 && spacesX == 0 && first_move) {
             //check for check; if check can't castle
             point kingPos1 = null;
-            for(int i=0; i<8; i++){
-                for(int j=0; j<8; j++){
-                    if(game.b[i][j]!= null && game.b[i][j] instanceof king && (game.b[i][j].getIsBlack()==game.b[origin.getX()][origin.getY()].isBlack)){
-                        kingPos1 = new point(i,j);
-                        if(check(game, kingPos1)){
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (game.b[i][j] != null && game.b[i][j] instanceof king && (game.b[i][j].getIsBlack() == game.b[origin.getX()][origin.getY()].isBlack)) {
+                        kingPos1 = new point(i, j);
+                        if (check(game, kingPos1)) {
                             return false;
                         }
                     }
@@ -105,8 +112,8 @@ public class king extends piece{
                             return false;
                     }
                     first_move = false;
-                    board[originX][originY-1] = board[originX][0];
-                    board[originX][originY-1].first_move = false;
+                    board[originX][originY - 1] = board[originX][0];
+                    board[originX][originY - 1].first_move = false;
                     board[originX][0] = null;
 
 
@@ -117,12 +124,12 @@ public class king extends piece{
 
                     //if move leads to check
                     point kingPos = null;
-                    for(int i=0; i<8; i++){ //set enpass = false
-                        for(int j=0; j<8; j++){
-                            if(newGame.b[i][j]!= null && newGame.b[i][j] instanceof king && (newGame.b[i][j].getIsBlack()==game.b[origin.getX()][origin.getY()].isBlack)){
-                                kingPos = new point(i,j);
-                                if(check(newGame, kingPos)){
-                                    board[originX][0] = board[originX][originY-1]; //undo castle
+                    for (int i = 0; i < 8; i++) { //set enpass = false
+                        for (int j = 0; j < 8; j++) {
+                            if (newGame.b[i][j] != null && newGame.b[i][j] instanceof king && (newGame.b[i][j].getIsBlack() == game.b[origin.getX()][origin.getY()].isBlack)) {
+                                kingPos = new point(i, j);
+                                if (check(newGame, kingPos)) {
+                                    board[originX][0] = board[originX][originY - 1]; //undo castle
                                     return false;
                                 }
                             }
@@ -130,8 +137,7 @@ public class king extends piece{
                     }
                     return true;
                 }
-            }
-            else {
+            } else {
                 if (rightRook != null && rightRook instanceof rook
                         && rightRook.isFirst_move() && rightRook.getIsBlack() == getIsBlack()) {
                     for (int i = originY + 1; i < 7; i++) {
@@ -139,8 +145,8 @@ public class king extends piece{
                             return false;
                     }
                     first_move = false;
-                    board[originX][originY+1] = board[originX][7];
-                    board[originX][originY+1].first_move = false;
+                    board[originX][originY + 1] = board[originX][7];
+                    board[originX][originY + 1].first_move = false;
                     board[originX][7] = null;
 
                     board newGame = game.copyBoard();
@@ -150,11 +156,11 @@ public class king extends piece{
 
                     //if move leads to check
                     point kingPos = null;
-                    for(int i=0; i<8; i++){ //set enpass = false
-                        for(int j=0; j<8; j++){
-                            if(newGame.b[i][j]!= null && newGame.b[i][j] instanceof king && (newGame.b[i][j].getIsBlack()==game.b[origin.getX()][origin.getY()].isBlack)){
-                                kingPos = new point(i,j);
-                                if(check(newGame, kingPos)){
+                    for (int i = 0; i < 8; i++) { //set enpass = false
+                        for (int j = 0; j < 8; j++) {
+                            if (newGame.b[i][j] != null && newGame.b[i][j] instanceof king && (newGame.b[i][j].getIsBlack() == game.b[origin.getX()][origin.getY()].isBlack)) {
+                                kingPos = new point(i, j);
+                                if (check(newGame, kingPos)) {
                                     //system.out.println("Cannot make this move because it puts your king in check: King");
                                     return false;
                                 }

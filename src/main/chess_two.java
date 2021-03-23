@@ -3,19 +3,33 @@ package main;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import pieces.king;
 import pieces.pawn;
 import pieces.piece;
+
+/**
+ * Handles the chess game
+ *
+ * @author Parth Patel
+ * @author Amanda Kang
+ */
 
 public class chess_two {
     board game;
 
 
+    /**
+     * Sets up board and initializes game.
+     */
     public chess_two() {
         game = new board();
         start();
     }
 
+    /**
+     * Runs the game.
+     */
     public void start() {
         Scanner scn = new Scanner(System.in);
         String input;
@@ -105,20 +119,20 @@ public class chess_two {
                 continue;
             }
 
-        //    System.out.println("successfully made move");
+            //    System.out.println("successfully made move");
             // check
             point kingPos = null;
             for (int i = 0; i < 8; i++) { //set enpass = false
                 for (int j = 0; j < 8; j++) {
                     if (game.b[i][j] instanceof king && (game.b[i][j].getIsBlack() == turn)) {
                         kingPos = new point(i, j);
-                 //       System.out.println(game.b[i][j]+" king at");
+                        //       System.out.println(game.b[i][j]+" king at");
                         isCheck = check(game, kingPos);
                         break;
                     }
                 }
             }
-          //  System.out.println(isCheck+"is check???");
+            //  System.out.println(isCheck+"is check???");
 
             // checkmate
             if (isCheck) {
@@ -139,15 +153,33 @@ public class chess_two {
             System.out.println("Draw");
     }
 
+    /**
+     * Moves a piece given its origin and destination coordinates.
+     *
+     * @param origin The original position of the piece.
+     * @param dest   The destination position of the piece.
+     */
     public void move_piece(point origin, point dest) {
         game.b[dest.getX()][dest.getY()] = game.b[origin.getX()][origin.getY()];
         game.b[origin.getX()][origin.getY()] = null;
     }
 
+    /**
+     * Main method, creates an instance of chess_two.
+     *
+     * @param args Command-line arguments.
+     */
     public static void main(String[] args) {
         chess_two game = new chess_two();
     }
 
+    /**
+     * Tests if a given king is in check.
+     *
+     * @param game        The current state of the board.
+     * @param destination The location of the given king.
+     * @return A boolean value representing if the king is in check (true) or not (false).
+     */
     public static boolean check(board game, point destination) {
         piece[][] board = game.b;
         for (int i = 0; i < 8; i++) {
@@ -164,6 +196,13 @@ public class chess_two {
         return false;
     }
 
+    /**
+     * Tests if a given king is in checkmate.
+     *
+     * @param game        The current state of the board.
+     * @param destination The location of the given king.
+     * @return A boolean value representing if the king is in checkmate (true) or not (false)
+     */
     public static boolean checkmate(board game, point destination) {
         piece[][] board = game.b;
         boolean isBlack = board[destination.getX()][destination.getY()].getIsBlack();

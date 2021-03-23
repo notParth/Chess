@@ -7,29 +7,39 @@ import static main.chess_two.check;
 
 /**
  * Represents a queen piece
+ *
  * @author Parth Patel
  * @author Amanda Kang
  */
 
-public class queen extends piece{
+public class queen extends piece {
     /**
      * Creates an instance of queen
+     *
      * @param isBlack color of queen
      */
-    public queen(boolean isBlack){ super("Q", isBlack); }
+    public queen(boolean isBlack) {
+        super("Q", isBlack);
+    }
 
-
-    public piece copy(){
+    /**
+     * Creates a copy of a given piece.
+     *
+     * @return The new piece.
+     */
+    public piece copy() {
         queen newPiece = new queen(this.isBlack);
         newPiece.first_move = this.first_move;
         newPiece.promo = this.promo;
 
         return newPiece;
     }
+
     /**
      * Check if a move for the queen on a given board valid or not
-     * @param game A chess board with a given state
-     * @param origin The origin of the move
+     *
+     * @param game        A chess board with a given state
+     * @param origin      The origin of the move
      * @param destination The destination of the move
      * @return
      */
@@ -46,18 +56,17 @@ public class queen extends piece{
 
         //if move leads to check
         point kingPos = null;
-        for(int i=0; i<8; i++){ //set enpass = false
-            for(int j=0; j<8; j++){
-                if(newGame.b[i][j]!= null && newGame.b[i][j] instanceof king && (newGame.b[i][j].getIsBlack()==game.b[origin.getX()][origin.getY()].isBlack)){
-                    kingPos = new point(i,j);
-                    if(check(newGame, kingPos)){
+        for (int i = 0; i < 8; i++) { //set enpass = false
+            for (int j = 0; j < 8; j++) {
+                if (newGame.b[i][j] != null && newGame.b[i][j] instanceof king && (newGame.b[i][j].getIsBlack() == game.b[origin.getX()][origin.getY()].isBlack)) {
+                    kingPos = new point(i, j);
+                    if (check(newGame, kingPos)) {
                         //System.out.println("Cannot make this move because it puts your king in check: Queen");
                         return false;
                     }
                 }
             }
         }
-
 
 
         int originX = origin.getX();
@@ -70,7 +79,7 @@ public class queen extends piece{
         int spacesY = Math.abs(originY - destY);
 
         // check to make sure not attacking same color piece
-        if (board[destX][destY]!=null && board[destX][destY].getIsBlack() == getIsBlack())
+        if (board[destX][destY] != null && board[destX][destY].getIsBlack() == getIsBlack())
             return false;
 
         // check to make sure the movement is diagonal
@@ -79,19 +88,19 @@ public class queen extends piece{
 
             // movement is top and right
             if (destX > originX && destY > originY) {
-                for (int i = originX+1, j = originY+1; i < destX && j < destY; i++, j++)
+                for (int i = originX + 1, j = originY + 1; i < destX && j < destY; i++, j++)
                     if (board[i][j] != null)
                         return false;
             } else if (destX > originX && destY < originY) { // movement is top and left
-                for (int i = originX+1, j = originY-1; i < destX && j > destY; i++, j--)
+                for (int i = originX + 1, j = originY - 1; i < destX && j > destY; i++, j--)
                     if (board[i][j] != null)
                         return false;
-            }else if (destX < originX && destY < originY) {// movement is bottom and left
-                for (int i = originX-1, j = originY-1; i > destX && j > destY; i--, j--)
+            } else if (destX < originX && destY < originY) {// movement is bottom and left
+                for (int i = originX - 1, j = originY - 1; i > destX && j > destY; i--, j--)
                     if (board[i][j] != null)
                         return false;
-            }else {// movement is bottom and right
-                for (int i = originX-1, j = originY+1; i > destX && j < destY; i--, j++)
+            } else {// movement is bottom and right
+                for (int i = originX - 1, j = originY + 1; i > destX && j < destY; i--, j++)
                     if (board[i][j] != null)
                         return false;
             }
@@ -102,13 +111,13 @@ public class queen extends piece{
             if (spacesX == 0 && spacesY > 0) {
                 // moving right
                 if (originY < destY) {
-                    for (int i = originY+1; i < destY; i++)
+                    for (int i = originY + 1; i < destY; i++)
                         if (board[originX][i] != null)
                             return false;
                 }
                 // moving left
                 else {
-                    for (int i = originY-1; i > destY; i--)
+                    for (int i = originY - 1; i > destY; i--)
                         if (board[originX][i] != null)
                             return false;
                 }
@@ -118,13 +127,13 @@ public class queen extends piece{
             if (spacesX > 0 && spacesY == 0) {
                 // moving up
                 if (originX < destX) {
-                    for (int i = originX+1; i < destX; i++)
+                    for (int i = originX + 1; i < destX; i++)
                         if (board[i][originY] != null)
                             return false;
                 }
                 // moving down
                 else {
-                    for (int i = originX-11; i > destX; i--)
+                    for (int i = originX - 11; i > destX; i--)
                         if (board[i][originY] != null)
                             return false;
                 }
