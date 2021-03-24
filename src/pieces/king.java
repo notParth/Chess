@@ -74,7 +74,7 @@ public class king extends piece {
             point kingPos = null;
             for (int i = 0; i < 8; i++) { //set enpass = false
                 for (int j = 0; j < 8; j++) {
-                    if (newGame.b[i][j] != null && newGame.b[i][j] instanceof king && (newGame.b[i][j].getIsBlack() != newGame.b[origin.getY()][origin.getY()].isBlack)) {
+                    if (newGame.b[i][j] != null && newGame.b[i][j] instanceof king && (newGame.b[i][j].getIsBlack() == game.b[origin.getX()][origin.getY()].isBlack)) {
                         kingPos = new point(i, j);
                         if (check(newGame, kingPos)) {
                             //System.out.println("Cannot make this move because it puts your king in check: King");
