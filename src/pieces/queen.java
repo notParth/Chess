@@ -3,7 +3,7 @@ package pieces;
 import main.board;
 import main.point;
 
-import static main.chess_two.check;
+import static main.Chess.check;
 
 /**
  * Represents a queen piece

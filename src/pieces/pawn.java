@@ -2,7 +2,7 @@ package pieces;
 
 import main.*;
 
-import static main.chess_two.check;
+import static main.Chess.check;
 
 /**
  * Represents a pawn piece

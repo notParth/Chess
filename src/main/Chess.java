@@ -15,14 +15,14 @@ import pieces.piece;
  * @author Amanda Kang
  */
 
-public class chess_two {
+public class Chess {
     board game;
 
 
     /**
      * Sets up board and initializes game.
      */
-    public chess_two() {
+    public Chess() {
         game = new board();
         start();
     }
@@ -140,10 +140,10 @@ public class chess_two {
 
             // checkmate
             if (isCheck) {
-                System.out.println("Check.");
+                System.out.println("Check");
                 terminate = checkmate(game, kingPos);
                 if (terminate) {
-                    System.out.println("Checkmate.");
+                    System.out.println("Checkmate");
                     winner = turn ? 'w' : 'b';
                     break;
                 }
@@ -178,12 +178,12 @@ public class chess_two {
     }
 
     /**
-     * Main method, creates an instance of chess_two.
+     * Main method, creates an instance of Chess.
      *
      * @param args Command-line arguments.
      */
     public static void main(String[] args) {
-        chess_two game = new chess_two();
+        Chess game = new Chess();
     }
 
     /**
