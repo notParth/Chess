@@ -14,7 +14,7 @@ import static main.chess_two.check;
 public class pawn extends piece {
 
     // used for enpassant
-    boolean double_step;
+    public boolean double_step;
 
     /**
      * Creates an instance of pawn

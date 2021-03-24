@@ -92,7 +92,7 @@ public class chess_two {
             }
             // wrong
             else {
-                System.out.println("Illegal move, try again. Bad input");
+                System.out.println("Illegal move, try again.");
                 continue;
             }
             point start = new point(origin);
@@ -102,7 +102,7 @@ public class chess_two {
 
             // check if not player operating the correct color piece
             if (game.b[start.getX()][start.getY()] == null || game.b[start.getX()][start.getY()].getIsBlack() != turn) {
-                System.out.println("Illegal move, try again. Color");
+                System.out.println("Illegal move, try again.");
                 continue;
             }
             if (promo) {
@@ -115,7 +115,7 @@ public class chess_two {
                 turn = !turn;
                 legal_move = true;
             } else {
-                System.out.println("Illegal move, try again. Not Valid");
+                System.out.println("Illegal move, try again.");
                 continue;
             }
 
@@ -142,6 +142,15 @@ public class chess_two {
                     System.out.println("Checkmate!!");
                     winner = turn ? 'b' : 'w';
                     break;
+                }
+            }
+            // turn double jump to false for enpassant
+            // if white's turn, turn black's pawns to false for enpassant and vice versa
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (game.b[i][j] != null && game.b[i][j].getIsBlack() != turn && game.b[i][j] instanceof pawn) {
+                        ((pawn) game.b[i][j]).double_step = false;
+                    }
                 }
             }
         }
