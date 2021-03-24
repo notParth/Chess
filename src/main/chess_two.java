@@ -47,6 +47,7 @@ public class chess_two {
         boolean legal_move = true;
         boolean promo = false;
         boolean isCheck = false;
+        boolean draw = false;
         while (!terminate) {
             if (legal_move) {
                 System.out.println();
@@ -78,8 +79,7 @@ public class chess_two {
             else if (m3.matches()) {
                 origin = m3.group(1);
                 destination = m3.group(2);
-                terminate = true;
-                winner = 'd';
+                draw = true;
             }
             // resign
             else if (input.equals("resign")) {
@@ -114,6 +114,10 @@ public class chess_two {
                 move_piece(start, end);
                 turn = !turn;
                 legal_move = true;
+                if (draw) {
+                    terminate = true;
+                    winner = 'd';
+                }
             } else {
                 System.out.println("Illegal move, try again.");
                 continue;
@@ -136,11 +140,11 @@ public class chess_two {
 
             // checkmate
             if (isCheck) {
-                System.out.println("Check!!");
+                System.out.println("Check.");
                 terminate = checkmate(game, kingPos);
                 if (terminate) {
-                    System.out.println("Checkmate!!");
-                    winner = turn ? 'b' : 'w';
+                    System.out.println("Checkmate.");
+                    winner = turn ? 'w' : 'b';
                     break;
                 }
             }
@@ -159,7 +163,7 @@ public class chess_two {
         else if (winner == 'b')
             System.out.println("Black wins");
         else if (winner == 'd')
-            System.out.println("Draw");
+            System.out.println("draw");
     }
 
     /**
@@ -239,7 +243,6 @@ public class chess_two {
                                 board[hOrig.getX()][hOrig.getY()] = board[hDest.getX()][hDest.getY()];
                                 board[hDest.getX()][hDest.getY()] = null;
                                 if (!isCheck) {
-                                    System.out.println("Escaped checkmate with " + board[hOrig.getX()][hOrig.getY()] + " from " + hOrig + " to " + hDest);
                                     return false;
                                 }
                             }
